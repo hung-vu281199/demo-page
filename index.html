@@ -1,1 +1,57 @@
-<h1>demo</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      var myHeaders = new Headers();
+    // myHeaders.append('ngrok-skip-browser-warning', 'any')
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "REFRESH_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJkNTM3ODkwNy0yNzY4LTQyZTgtOTM1Ni0xN2MxY2M4MzM5NDgiLCJpYXQiOjE2ODMwMzAwNTMsImV4cCI6MTY4NTYyMjA1M30.1r-DPPl9_g2sLcixGKs6ayoHWkf4ZG6yQF5uWMpFeOg; XSRF_TOKEN=afImTWYb5Epy8MNsQMYOIkFg");
+
+var raw = JSON.stringify({
+  "email_username_id": "hung2811.iuh@gmail.com",
+  "password": "Hung@123"
+});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://a972-171-235-34-175.ngrok-free.app/api/test/auth/login", requestOptions)
+  .then(response => response.text())
+  .then(result => {
+    const { password } = JSON.parse(result)
+    var myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+myHeaders.append("Cookie", "REFRESH_TOKEN=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI5NTA1YWQ4Yy1lOTY3LTQ3MTItYWU0Ny1kYmQzZjVkMjc5NDIiLCJpYXQiOjE2ODMwMzMzOTksImV4cCI6MTY4NTYyNTM5OX0.fbvNPMV0qS26Zw7nLGG3V4It05A9HHS681_cwjPgB60; XSRF_TOKEN=BHGIIvkqmeBQNAsO47KrQmne");
+
+var raw = JSON.stringify({
+  "usernameOrEmail": "hung2811.iuh@gmail.com",
+  "password": password,
+  "remember_me": true
+});
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://45ce-171-235-34-175.ngrok-free.app/api/auth/login?locale=en", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(JSON.parse(result)))
+  .catch(error => console.log('error', error));
+  })
+  .catch(error => console.log('error', error));
+    </script>
+</body>
+</html>
